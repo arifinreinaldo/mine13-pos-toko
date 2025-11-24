@@ -5,47 +5,76 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 30px;
+            font-size: 18px;
+            line-height: 1.6;
         }
         .header {
             text-align: center;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #333;
-            padding-bottom: 20px;
+            margin-bottom: 40px;
+            border-bottom: 4px solid #333;
+            padding-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            font-weight: bold;
         }
         .company-info {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            font-size: 20px;
+        }
+        .company-info p {
+            margin: 10px 0;
+            font-size: 20px;
         }
         .invoice-info {
-            margin-bottom: 30px;
+            margin-bottom: 35px;
+            font-size: 20px;
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            font-size: 20px;
         }
         th, td {
-            padding: 10px;
+            padding: 15px 12px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 2px solid #ddd;
         }
         th {
-            background-color: #f4f4f4;
+            background-color: #e8e8e8;
+            font-weight: bold;
+            font-size: 22px;
         }
         .totals {
             float: right;
-            width: 300px;
+            width: 400px;
         }
         .totals table {
             width: 100%;
+            font-size: 22px;
+        }
+        .totals td {
+            padding: 12px;
+        }
+        .totals .total-row {
+            font-weight: bold;
+            font-size: 26px;
+            background-color: #f0f0f0;
         }
         .footer {
-            margin-top: 50px;
+            margin-top: 60px;
             text-align: center;
-            border-top: 2px solid #333;
-            padding-top: 20px;
+            border-top: 4px solid #333;
+            padding-top: 30px;
+            font-size: 20px;
+        }
+        strong {
+            font-weight: bold;
         }
         @media print {
             .no-print {
@@ -75,6 +104,20 @@
         </div>
     </div>
 
+    @if($sale->customer)
+        <div style="margin-bottom: 30px; background-color: #f5f5f5; padding: 25px; border-radius: 8px; border: 2px solid #ddd;">
+            <h3 style="margin-top: 0; font-size: 26px; font-weight: bold; margin-bottom: 15px;">Customer Information</h3>
+            <p style="margin: 10px 0; font-size: 20px;"><strong>Name:</strong> {{ $sale->customer->name }}</p>
+            <p style="margin: 10px 0; font-size: 20px;"><strong>Code:</strong> {{ $sale->customer->customer_code }}</p>
+            @if($sale->customer->phone)
+                <p style="margin: 10px 0; font-size: 20px;"><strong>Phone:</strong> {{ $sale->customer->phone }}</p>
+            @endif
+            @if($sale->customer->email)
+                <p style="margin: 10px 0; font-size: 20px;"><strong>Email:</strong> {{ $sale->customer->email }}</p>
+            @endif
+        </div>
+    @endif
+
     <div class="invoice-info">
         <table style="border: none;">
             <tr>
@@ -88,7 +131,7 @@
         </table>
     </div>
 
-    <h3>Items</h3>
+    <h3 style="font-size: 28px; margin-bottom: 20px; font-weight: bold;">Items Purchased</h3>
     <table>
         <thead>
             <tr>
@@ -126,8 +169,8 @@
                 <td><strong>Discount:</strong></td>
                 <td style="text-align: right;">-${{ number_format($sale->discount, 2) }}</td>
             </tr>
-            <tr style="font-size: 1.2em;">
-                <td><strong>Total:</strong></td>
+            <tr class="total-row">
+                <td><strong>TOTAL:</strong></td>
                 <td style="text-align: right;"><strong>${{ number_format($sale->total, 2) }}</strong></td>
             </tr>
         </table>
@@ -136,9 +179,9 @@
     <div style="clear: both;"></div>
 
     @if($sale->notes)
-        <div style="margin-top: 20px;">
-            <strong>Notes:</strong>
-            <p>{{ $sale->notes }}</p>
+        <div style="margin-top: 30px; background-color: #fffbf0; padding: 20px; border-radius: 8px; border: 2px solid #f0e68c;">
+            <strong style="font-size: 22px;">Notes:</strong>
+            <p style="font-size: 20px; margin-top: 10px;">{{ $sale->notes }}</p>
         </div>
     @endif
 
@@ -146,12 +189,12 @@
         {{ $settings['invoice_footer'] }}
     </div>
 
-    <div class="no-print" style="margin-top: 30px; text-align: center;">
-        <button onclick="window.print()" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">
-            Print Invoice
+    <div class="no-print" style="margin-top: 40px; text-align: center;">
+        <button onclick="window.print()" style="padding: 18px 40px; font-size: 20px; font-weight: bold; background-color: #4CAF50; color: white; border: none; border-radius: 10px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            🖨️ Print Invoice
         </button>
-        <button onclick="window.close()" style="padding: 10px 20px; background-color: #f44336; color: white; border: none; border-radius: 5px; cursor: pointer; margin-left: 10px;">
-            Close
+        <button onclick="window.close()" style="padding: 18px 40px; font-size: 20px; font-weight: bold; background-color: #f44336; color: white; border: none; border-radius: 10px; cursor: pointer; margin-left: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            ✕ Close
         </button>
     </div>
 </body>

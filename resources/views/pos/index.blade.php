@@ -1,54 +1,57 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-3xl text-gray-800 leading-tight">
             {{ __('Point of Sale') }}
         </h2>
     </x-slot>
 
-    <div class="py-2 sm:py-6">
-        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+    <div class="py-4 sm:py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Mobile Cart Toggle Button -->
-            <div class="lg:hidden mb-4">
-                <button onclick="toggleMobileCart()" class="w-full bg-blue-500 text-white px-4 py-3 rounded-lg hover:bg-blue-600 font-semibold flex items-center justify-between">
+            <div class="lg:hidden mb-6">
+                <button onclick="toggleMobileCart()" class="w-full bg-blue-600 text-white px-6 py-5 rounded-xl hover:bg-blue-700 font-bold text-2xl flex items-center justify-between shadow-lg">
                     <span>View Cart</span>
-                    <span id="cartCount" class="bg-white text-blue-500 px-3 py-1 rounded-full">0</span>
+                    <span id="cartCount" class="bg-white text-blue-600 px-5 py-2 rounded-full text-xl font-bold">0</span>
                 </button>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
                 <!-- Products Section -->
                 <div class="lg:col-span-2" id="productsSection">
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-3 sm:p-6">
-                            <h3 class="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Products</h3>
+                    <div class="bg-white overflow-hidden shadow-lg rounded-xl border-2 border-gray-200">
+                        <div class="p-6 sm:p-8">
+                            <h3 class="text-2xl sm:text-3xl font-bold mb-6 text-gray-800">Select Products</h3>
 
                             <!-- Product Search -->
-                            <div class="mb-3 sm:mb-4">
-                                <input type="text" id="productSearch" placeholder="Search products..." class="w-full px-3 py-2 text-sm sm:text-base border rounded-lg">
+                            <div class="mb-6">
+                                <label class="block text-xl font-semibold mb-3 text-gray-700">Search:</label>
+                                <input type="text" id="productSearch" placeholder="Type product name..." class="w-full px-6 py-5 text-2xl border-3 border-gray-300 rounded-xl focus:ring-4 focus:ring-blue-300 focus:border-blue-500">
                             </div>
 
                             <!-- Category Tabs -->
-                            <div class="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4 overflow-x-auto">
-                                <button onclick="filterCategory('all')" class="category-btn px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm bg-blue-500 text-white rounded hover:bg-blue-600 whitespace-nowrap">All</button>
-                                @foreach($categories as $category)
-                                    <button onclick="filterCategory('{{ $category->id }}')" class="category-btn px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm bg-gray-200 rounded hover:bg-gray-300 whitespace-nowrap">
-                                        {{ $category->name }}
-                                    </button>
-                                @endforeach
+                            <div class="mb-6">
+                                <label class="block text-xl font-semibold mb-3 text-gray-700">Category:</label>
+                                <div class="flex flex-wrap gap-3 overflow-x-auto pb-2">
+                                    <button onclick="filterCategory('all')" class="category-btn px-8 py-4 text-xl font-bold bg-blue-600 text-white rounded-xl hover:bg-blue-700 whitespace-nowrap shadow-md">All Products</button>
+                                    @foreach($categories as $category)
+                                        <button onclick="filterCategory('{{ $category->id }}')" class="category-btn px-8 py-4 text-xl font-semibold bg-gray-200 text-gray-800 rounded-xl hover:bg-gray-300 whitespace-nowrap shadow-md">
+                                            {{ $category->name }}
+                                        </button>
+                                    @endforeach
+                                </div>
                             </div>
 
                             <!-- Products Grid -->
-                            <div id="productsGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-2 sm:gap-4 max-h-[400px] sm:max-h-96 overflow-y-auto">
+                            <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[500px] overflow-y-auto pr-2">
                                 @foreach($categories as $category)
                                     @foreach($category->products as $product)
                                         @if($product->stock_quantity > 0)
-                                            <div class="product-item border rounded-lg p-2 sm:p-4 cursor-pointer hover:bg-gray-50 active:bg-gray-100"
+                                            <div class="product-item border-3 border-gray-300 rounded-xl p-6 cursor-pointer hover:bg-blue-50 hover:border-blue-500 active:bg-blue-100 shadow-md transition-all"
                                                  data-category="{{ $category->id }}"
                                                  onclick='addToCart(@json($product))'>
-                                                <div class="font-semibold text-xs sm:text-sm truncate">{{ $product->name }}</div>
-                                                <div class="text-xs text-gray-600 hidden sm:block">{{ $product->sku }}</div>
-                                                <div class="text-sm sm:text-lg font-bold text-blue-600">${{ number_format($product->price, 2) }}</div>
-                                                <div class="text-xs text-gray-500">Stock: {{ $product->stock_quantity }}</div>
+                                                <div class="font-bold text-xl mb-2 text-gray-800">{{ $product->name }}</div>
+                                                <div class="text-3xl font-bold text-blue-600 mb-2">${{ number_format($product->price, 2) }}</div>
+                                                <div class="text-lg text-gray-600">Stock: {{ $product->stock_quantity }} available</div>
                                             </div>
                                         @endif
                                     @endforeach
@@ -60,57 +63,67 @@
 
                 <!-- Cart Section -->
                 <div class="lg:col-span-1 fixed inset-0 lg:relative bg-white lg:bg-transparent z-50 hidden lg:block" id="cartSection">
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg h-full lg:sticky lg:top-6">
-                        <div class="p-3 sm:p-6 h-full flex flex-col">
-                            <div class="flex justify-between items-center mb-3 sm:mb-4">
-                                <h3 class="text-base sm:text-lg font-semibold">Cart</h3>
-                                <button onclick="toggleMobileCart()" class="lg:hidden text-gray-500 hover:text-gray-700">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    <div class="bg-white overflow-hidden shadow-lg rounded-xl border-2 border-gray-200 h-full lg:sticky lg:top-6">
+                        <div class="p-6 sm:p-8 h-full flex flex-col">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="text-2xl sm:text-3xl font-bold text-gray-800">Shopping Cart</h3>
+                                <button onclick="toggleMobileCart()" class="lg:hidden text-gray-600 hover:text-gray-800">
+                                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
                                     </svg>
                                 </button>
                             </div>
 
-                            <div id="cartItems" class="space-y-2 mb-4 flex-1 overflow-y-auto"></div>
+                            <div id="cartItems" class="space-y-4 mb-6 flex-1 overflow-y-auto"></div>
 
-                            <div class="border-t pt-3 sm:pt-4 space-y-2">
-                                <div class="flex justify-between text-sm sm:text-base">
-                                    <span>Subtotal:</span>
-                                    <span id="subtotal">$0.00</span>
+                            <div class="border-t-4 border-gray-300 pt-6 space-y-4">
+                                <div class="flex justify-between text-xl font-semibold">
+                                    <span class="text-gray-700">Subtotal:</span>
+                                    <span id="subtotal" class="text-gray-900">$0.00</span>
                                 </div>
-                                <div class="flex justify-between text-sm sm:text-base">
-                                    <span>Tax:</span>
-                                    <input type="number" id="tax" value="0" step="0.01" min="0" class="w-20 sm:w-24 px-2 py-1 text-sm border rounded text-right" onchange="updateTotals()">
+                                <div class="flex justify-between items-center text-xl">
+                                    <span class="text-gray-700 font-semibold">Tax ($):</span>
+                                    <input type="number" id="tax" value="0" step="0.01" min="0" class="w-32 px-4 py-3 text-xl font-semibold border-2 border-gray-300 rounded-lg text-right focus:ring-4 focus:ring-blue-300 focus:border-blue-500" onchange="updateTotals()">
                                 </div>
-                                <div class="flex justify-between text-sm sm:text-base">
-                                    <span>Discount:</span>
-                                    <input type="number" id="discount" value="0" step="0.01" min="0" class="w-20 sm:w-24 px-2 py-1 text-sm border rounded text-right" onchange="updateTotals()">
+                                <div class="flex justify-between items-center text-xl">
+                                    <span class="text-gray-700 font-semibold">Discount ($):</span>
+                                    <input type="number" id="discount" value="0" step="0.01" min="0" class="w-32 px-4 py-3 text-xl font-semibold border-2 border-gray-300 rounded-lg text-right focus:ring-4 focus:ring-blue-300 focus:border-blue-500" onchange="updateTotals()">
                                 </div>
-                                <div class="flex justify-between text-lg sm:text-xl font-bold">
-                                    <span>Total:</span>
-                                    <span id="total">$0.00</span>
+                                <div class="flex justify-between text-3xl font-bold bg-blue-50 p-4 rounded-xl">
+                                    <span class="text-gray-800">TOTAL:</span>
+                                    <span id="total" class="text-blue-600">$0.00</span>
                                 </div>
                             </div>
 
-                            <div class="mt-3 sm:mt-4">
-                                <label class="block text-xs sm:text-sm font-medium mb-2">Payment Method:</label>
-                                <select id="paymentMethod" class="w-full px-2 sm:px-3 py-2 text-sm border rounded">
-                                    <option value="cash">Cash</option>
-                                    <option value="card">Card</option>
-                                    <option value="transfer">Transfer</option>
+                            <div class="mt-5">
+                                <label class="block text-xl font-bold mb-3 text-gray-700">Customer:</label>
+                                <select id="customerId" class="w-full px-5 py-4 text-xl font-semibold border-2 border-gray-300 rounded-xl focus:ring-4 focus:ring-blue-300 focus:border-blue-500">
+                                    <option value="">Walk-in Customer</option>
+                                    @foreach($customers as $customer)
+                                        <option value="{{ $customer->id }}">{{ $customer->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
-                            <div class="mt-3 sm:mt-4">
-                                <label class="block text-xs sm:text-sm font-medium mb-2">Notes (Optional):</label>
-                                <textarea id="notes" class="w-full px-2 sm:px-3 py-2 text-sm border rounded" rows="2"></textarea>
+                            <div class="mt-5">
+                                <label class="block text-xl font-bold mb-3 text-gray-700">Payment Method:</label>
+                                <select id="paymentMethod" class="w-full px-5 py-4 text-xl font-semibold border-2 border-gray-300 rounded-xl focus:ring-4 focus:ring-blue-300 focus:border-blue-500">
+                                    <option value="cash">Cash</option>
+                                    <option value="card">Card</option>
+                                    <option value="transfer">Bank Transfer</option>
+                                </select>
                             </div>
 
-                            <div class="mt-3 sm:mt-4 space-y-2">
-                                <button onclick="processSale()" class="w-full bg-green-500 text-white px-4 py-2 sm:py-3 rounded-lg hover:bg-green-600 font-semibold text-sm sm:text-base">
-                                    Complete Sale
+                            <div class="mt-5">
+                                <label class="block text-xl font-bold mb-3 text-gray-700">Notes (Optional):</label>
+                                <textarea id="notes" class="w-full px-5 py-4 text-xl border-2 border-gray-300 rounded-xl focus:ring-4 focus:ring-blue-300 focus:border-blue-500" rows="2"></textarea>
+                            </div>
+
+                            <div class="mt-6 space-y-4">
+                                <button onclick="processSale()" class="w-full bg-green-600 text-white px-6 py-6 rounded-xl hover:bg-green-700 font-bold text-2xl shadow-lg hover:shadow-xl transition-all">
+                                    ✓ COMPLETE SALE
                                 </button>
-                                <button onclick="clearCart()" class="w-full bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 text-sm sm:text-base">
+                                <button onclick="clearCart()" class="w-full bg-red-600 text-white px-6 py-5 rounded-xl hover:bg-red-700 font-bold text-xl shadow-lg hover:shadow-xl transition-all">
                                     Clear Cart
                                 </button>
                             </div>
@@ -156,7 +169,7 @@
                 if (existingItem.quantity < product.stock_quantity) {
                     existingItem.quantity++;
                 } else {
-                    alert('Not enough stock');
+                    alert('⚠️ NOT ENOUGH STOCK\n\nOnly ' + product.stock_quantity + ' items available.');
                     return;
                 }
             } else {
@@ -178,7 +191,7 @@
             } else if (newQuantity <= cart[index].stock) {
                 cart[index].quantity = newQuantity;
             } else {
-                alert('Not enough stock');
+                alert('⚠️ NOT ENOUGH STOCK\n\nOnly ' + cart[index].stock + ' items available.');
                 return;
             }
             renderCart();
@@ -193,19 +206,22 @@
             const cartItems = document.getElementById('cartItems');
 
             if (cart.length === 0) {
-                cartItems.innerHTML = '<p class="text-gray-500 text-center text-sm sm:text-base">Cart is empty</p>';
+                cartItems.innerHTML = '<p class="text-gray-500 text-center text-2xl py-8">Cart is empty</p>';
             } else {
                 cartItems.innerHTML = cart.map((item, index) => `
-                    <div class="flex justify-between items-center border-b pb-2">
-                        <div class="flex-1 min-w-0 pr-2">
-                            <div class="font-semibold text-xs sm:text-sm truncate">${item.name}</div>
-                            <div class="text-xs sm:text-sm text-gray-600">$${item.price.toFixed(2)} x ${item.quantity}</div>
+                    <div class="border-2 border-gray-300 rounded-xl p-5 bg-gray-50 shadow-md">
+                        <div class="mb-3">
+                            <div class="font-bold text-xl mb-2 text-gray-800">${item.name}</div>
+                            <div class="text-lg text-gray-600">$${item.price.toFixed(2)} each</div>
+                            <div class="text-2xl font-bold text-blue-600 mt-1">Total: $${(item.price * item.quantity).toFixed(2)}</div>
                         </div>
-                        <div class="flex items-center gap-1 sm:gap-2">
-                            <button onclick="updateQuantity(${index}, ${item.quantity - 1})" class="px-1 sm:px-2 py-1 bg-gray-200 rounded text-sm">-</button>
-                            <span class="text-sm">${item.quantity}</span>
-                            <button onclick="updateQuantity(${index}, ${item.quantity + 1})" class="px-1 sm:px-2 py-1 bg-gray-200 rounded text-sm">+</button>
-                            <button onclick="removeItem(${index})" class="px-1 sm:px-2 py-1 bg-red-500 text-white rounded text-sm">×</button>
+                        <div class="flex items-center justify-between gap-3 mt-4">
+                            <div class="flex items-center gap-3 bg-white border-2 border-gray-300 rounded-lg p-2">
+                                <button onclick="updateQuantity(${index}, ${item.quantity - 1})" class="px-5 py-3 bg-gray-200 hover:bg-gray-300 rounded-lg text-2xl font-bold w-14 h-14 flex items-center justify-center">−</button>
+                                <span class="text-2xl font-bold min-w-[3rem] text-center">${item.quantity}</span>
+                                <button onclick="updateQuantity(${index}, ${item.quantity + 1})" class="px-5 py-3 bg-gray-200 hover:bg-gray-300 rounded-lg text-2xl font-bold w-14 h-14 flex items-center justify-center">+</button>
+                            </div>
+                            <button onclick="removeItem(${index})" class="px-6 py-4 bg-red-600 text-white rounded-lg hover:bg-red-700 text-xl font-bold shadow-md">Remove</button>
                         </div>
                     </div>
                 `).join('');
@@ -244,8 +260,10 @@
                 price: item.price
             }));
 
+            const customerId = document.getElementById('customerId').value;
             const data = {
                 items: items,
+                customer_id: customerId || null,
                 payment_method: document.getElementById('paymentMethod').value,
                 tax: parseFloat(document.getElementById('tax').value) || 0,
                 discount: parseFloat(document.getElementById('discount').value) || 0,

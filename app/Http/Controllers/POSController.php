@@ -13,7 +13,8 @@ class POSController extends Controller
     public function index()
     {
         $categories = \App\Models\Category::with('products')->get();
-        return view('pos.index', compact('categories'));
+        $customers = \App\Models\Customer::orderBy('name')->get();
+        return view('pos.index', compact('categories', 'customers'));
     }
 
     public function processSale(Request $request)
@@ -23,6 +24,7 @@ class POSController extends Controller
             'items.*.product_id' => 'required|exists:products,id',
             'items.*.quantity' => 'required|integer|min:1',
             'items.*.price' => 'required|numeric|min:0',
+            'customer_id' => 'nullable|exists:customers,id',
             'payment_method' => 'required|in:cash,card,transfer',
             'tax' => 'nullable|numeric|min:0',
             'discount' => 'nullable|numeric|min:0',
@@ -49,6 +51,7 @@ class POSController extends Controller
 
             $sale = Sale::create([
                 'user_id' => auth()->id(),
+                'customer_id' => $validated['customer_id'] ?? null,
                 'invoice_number' => Sale::generateInvoiceNumber(),
                 'subtotal' => $subtotal,
                 'tax' => $tax,

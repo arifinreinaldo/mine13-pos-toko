@@ -10,7 +10,7 @@ class SaleController extends Controller
 {
     public function index()
     {
-        $sales = Sale::with(['user', 'saleItems.product'])
+        $sales = Sale::with(['user', 'customer', 'saleItems.product'])
             ->latest()
             ->paginate(20);
 
@@ -19,13 +19,13 @@ class SaleController extends Controller
 
     public function show(Sale $sale)
     {
-        $sale->load(['user', 'saleItems.product']);
+        $sale->load(['user', 'customer', 'saleItems.product']);
         return view('sales.show', compact('sale'));
     }
 
     public function invoice(Sale $sale)
     {
-        $sale->load(['user', 'saleItems.product']);
+        $sale->load(['user', 'customer', 'saleItems.product']);
 
         $settings = [
             'company_name' => Setting::get('company_name', 'POS System'),

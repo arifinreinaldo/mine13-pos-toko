@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\POSController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -29,6 +30,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('categories', CategoryController::class);
+
+    Route::resource('customers', CustomerController::class);
+    Route::get('/customers/search/api', [CustomerController::class, 'search'])->name('customers.search');
 
     Route::resource('products', ProductController::class);
     Route::get('/products/low-stock/list', [ProductController::class, 'lowStock'])->name('products.low-stock');
