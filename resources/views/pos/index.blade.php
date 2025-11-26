@@ -229,7 +229,11 @@
                                 <span class="text-2xl font-bold min-w-[3rem] text-center">${item.quantity}</span>
                                 <button onclick="updateQuantity(${index}, ${item.quantity + 1})" class="px-5 py-3 bg-gray-200 hover:bg-gray-300 rounded-lg text-2xl font-bold w-14 h-14 flex items-center justify-center">+</button>
                             </div>
-                            <button onclick="removeItem(${index})" class="px-6 py-4 bg-red-600 text-white rounded-lg hover:bg-red-700 text-xl font-bold shadow-md">Hapus</button>
+                            <button onclick="removeItem(${index})" class="px-4 py-4 bg-red-600 text-white rounded-lg hover:bg-red-700 shadow-md flex items-center justify-center w-14 h-14" title="Hapus">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 `).join('');
