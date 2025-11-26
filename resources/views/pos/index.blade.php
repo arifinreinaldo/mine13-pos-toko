@@ -74,7 +74,7 @@
                                 </button>
                             </div>
 
-                            <div id="cartItems" class="space-y-4 mb-6 flex-1 overflow-y-auto"></div>
+                            <div id="cartItems" class="space-y-4 mb-6 flex-1 overflow-y-auto max-h-[calc(100vh-650px)] lg:max-h-[400px] pr-2"></div>
 
                             <div class="border-t-4 border-gray-300 pt-6 space-y-4">
                                 <div class="flex justify-between text-xl font-semibold">
