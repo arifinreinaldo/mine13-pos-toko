@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(test:*)",
+      "Bash(php:*)",
+      "Bash(composer --version:*)",
+      "Bash(where:*)",
+      "Bash(move:*)",
+      "Bash(ren \"database\\migrations\\2025_11_23_075015_create_sale_items_table.php\" \"2025_11_23_075016_create_sale_items_table.php\")",
+      "Bash(npm run build:*)",
+      "Bash(npm install)",
+      "Bash(mkdir:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
