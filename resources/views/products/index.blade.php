@@ -97,7 +97,7 @@
                                             <a href="{{ route('products.show', $product) }}" class="inline-block bg-blue-600 text-white px-5 py-3 rounded-lg hover:bg-blue-700 border-2 border-blue-700 transition-all font-bold">
                                                 Lihat
                                             </a>
-                                            <a href="{{ route('products.edit', $product) }}" class="inline-block bg-indigo-600 text-white px-5 py-3 rounded-lg hover:bg-indigo-700 border-2 border-indigo-700 transition-all font-bold">
+                                            <a href="{{ route('products.edit', $product) }}" class="inline-block bg-yellow-400 text-gray-900 px-5 py-3 rounded-lg hover:bg-yellow-500 border-2 border-yellow-600 transition-all font-bold">
                                                 Ubah
                                             </a>
                                             <form action="{{ route('products.destroy', $product) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus produk ini?');">

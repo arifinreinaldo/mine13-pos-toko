@@ -51,7 +51,7 @@
                                             </td>
                                             <td class="px-6 py-6">
                                                 <div class="flex items-center justify-center gap-3">
-                                                    <a href="{{ route('categories.edit', $category) }}" class="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 font-bold text-lg shadow-md transition-all">
+                                                    <a href="{{ route('categories.edit', $category) }}" class="bg-yellow-400 text-gray-900 px-6 py-3 rounded-lg hover:bg-yellow-500 font-bold text-lg shadow-md transition-all border-2 border-yellow-600">
                                                         Ubah
                                                     </a>
                                                     <form action="{{ route('categories.destroy', $category) }}" method="POST" class="inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus kategori ini? Tindakan ini tidak dapat dibatalkan.');">

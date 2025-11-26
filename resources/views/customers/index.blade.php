@@ -63,7 +63,7 @@
                                                     Lihat
                                                 </a>
                                                 <a href="{{ route('customers.edit', $customer) }}"
-                                                   class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 font-bold text-lg shadow-md transition-all">
+                                                   class="bg-yellow-400 text-gray-900 px-6 py-3 rounded-lg hover:bg-yellow-500 font-bold text-lg shadow-md transition-all border-2 border-yellow-600">
                                                     Ubah
                                                 </a>
                                                 <form action="{{ route('customers.destroy', $customer) }}" method="POST"
@@ -116,7 +116,7 @@
                                         Lihat
                                     </a>
                                     <a href="{{ route('customers.edit', $customer) }}"
-                                       class="bg-green-600 text-white px-6 py-4 rounded-xl hover:bg-green-700 font-bold text-xl text-center shadow-md transition-all">
+                                       class="bg-yellow-400 text-gray-900 px-6 py-4 rounded-xl hover:bg-yellow-500 font-bold text-xl text-center shadow-md transition-all border-2 border-yellow-600">
                                         Ubah
                                     </a>
                                     <form action="{{ route('customers.destroy', $customer) }}" method="POST"
