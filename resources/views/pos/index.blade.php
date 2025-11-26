@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-3xl text-gray-800 leading-tight">
-            {{ __('Point of Sale') }}
+            {{ __('Kasir') }}
         </h2>
     </x-slot>
 
@@ -10,7 +10,7 @@
             <!-- Mobile Cart Toggle Button -->
             <div class="lg:hidden mb-6">
                 <button onclick="toggleMobileCart()" class="w-full bg-blue-600 text-white px-6 py-5 rounded-xl hover:bg-blue-700 font-bold text-2xl flex items-center justify-between shadow-lg">
-                    <span>View Cart</span>
+                    <span>Lihat Keranjang</span>
                     <span id="cartCount" class="bg-white text-blue-600 px-5 py-2 rounded-full text-xl font-bold">0</span>
                 </button>
             </div>
@@ -20,19 +20,19 @@
                 <div class="lg:col-span-2" id="productsSection">
                     <div class="bg-white overflow-hidden shadow-lg rounded-xl border-2 border-gray-200">
                         <div class="p-6 sm:p-8">
-                            <h3 class="text-2xl sm:text-3xl font-bold mb-6 text-gray-800">Select Products</h3>
+                            <h3 class="text-2xl sm:text-3xl font-bold mb-6 text-gray-800">Pilih Produk</h3>
 
                             <!-- Product Search -->
                             <div class="mb-6">
-                                <label class="block text-xl font-semibold mb-3 text-gray-700">Search:</label>
-                                <input type="text" id="productSearch" placeholder="Type product name..." class="w-full px-6 py-5 text-2xl border-3 border-gray-300 rounded-xl focus:ring-4 focus:ring-blue-300 focus:border-blue-500">
+                                <label class="block text-xl font-semibold mb-3 text-gray-700">Cari:</label>
+                                <input type="text" id="productSearch" placeholder="Ketik nama produk..." class="w-full px-6 py-5 text-2xl border-3 border-gray-300 rounded-xl focus:ring-4 focus:ring-blue-300 focus:border-blue-500">
                             </div>
 
                             <!-- Category Tabs -->
                             <div class="mb-6">
-                                <label class="block text-xl font-semibold mb-3 text-gray-700">Category:</label>
+                                <label class="block text-xl font-semibold mb-3 text-gray-700">Kategori:</label>
                                 <div class="flex flex-wrap gap-3 overflow-x-auto pb-2">
-                                    <button onclick="filterCategory('all')" class="category-btn px-8 py-4 text-xl font-bold bg-blue-600 text-white rounded-xl hover:bg-blue-700 whitespace-nowrap shadow-md">All Products</button>
+                                    <button onclick="filterCategory('all')" class="category-btn px-8 py-4 text-xl font-bold bg-blue-600 text-white rounded-xl hover:bg-blue-700 whitespace-nowrap shadow-md">Semua Produk</button>
                                     @foreach($categories as $category)
                                         <button onclick="filterCategory('{{ $category->id }}')" class="category-btn px-8 py-4 text-xl font-semibold bg-gray-200 text-gray-800 rounded-xl hover:bg-gray-300 whitespace-nowrap shadow-md">
                                             {{ $category->name }}
@@ -51,7 +51,7 @@
                                                  onclick='addToCart(@json($product))'>
                                                 <div class="font-bold text-xl mb-2 text-gray-800">{{ $product->name }}</div>
                                                 <div class="text-3xl font-bold text-blue-600 mb-2">{{ format_currency($product->price) }}</div>
-                                                <div class="text-lg text-gray-600">Stock: {{ $product->stock_quantity }} available</div>
+                                                <div class="text-lg text-gray-600">Stok: {{ $product->stock_quantity }} tersedia</div>
                                             </div>
                                         @endif
                                     @endforeach
@@ -66,7 +66,7 @@
                     <div class="bg-white overflow-hidden shadow-lg rounded-xl border-2 border-gray-200 h-full lg:sticky lg:top-6">
                         <div class="p-6 sm:p-8 h-full flex flex-col">
                             <div class="flex justify-between items-center mb-6">
-                                <h3 class="text-2xl sm:text-3xl font-bold text-gray-800">Shopping Cart</h3>
+                                <h3 class="text-2xl sm:text-3xl font-bold text-gray-800">Keranjang</h3>
                                 <button onclick="toggleMobileCart()" class="lg:hidden text-gray-600 hover:text-gray-800">
                                     <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
@@ -82,11 +82,11 @@
                                     <span id="subtotal" class="text-gray-900">Rp 0</span>
                                 </div>
                                 <div class="flex justify-between items-center text-xl">
-                                    <span class="text-gray-700 font-semibold">Tax (Rp):</span>
+                                    <span class="text-gray-700 font-semibold">Pajak (Rp):</span>
                                     <input type="number" id="tax" value="0" step="100" min="0" class="w-32 px-4 py-3 text-xl font-semibold border-2 border-gray-300 rounded-lg text-right focus:ring-4 focus:ring-blue-300 focus:border-blue-500" onchange="updateTotals()">
                                 </div>
                                 <div class="flex justify-between items-center text-xl">
-                                    <span class="text-gray-700 font-semibold">Discount (Rp):</span>
+                                    <span class="text-gray-700 font-semibold">Diskon (Rp):</span>
                                     <input type="number" id="discount" value="0" step="100" min="0" class="w-32 px-4 py-3 text-xl font-semibold border-2 border-gray-300 rounded-lg text-right focus:ring-4 focus:ring-blue-300 focus:border-blue-500" onchange="updateTotals()">
                                 </div>
                                 <div class="flex justify-between text-3xl font-bold bg-blue-50 p-4 rounded-xl">
@@ -96,9 +96,9 @@
                             </div>
 
                             <div class="mt-5">
-                                <label class="block text-xl font-bold mb-3 text-gray-700">Customer:</label>
+                                <label class="block text-xl font-bold mb-3 text-gray-700">Pelanggan:</label>
                                 <select id="customerId" class="w-full px-5 py-4 text-xl font-semibold border-2 border-gray-300 rounded-xl focus:ring-4 focus:ring-blue-300 focus:border-blue-500">
-                                    <option value="">Walk-in Customer</option>
+                                    <option value="">Pelanggan Umum</option>
                                     @foreach($customers as $customer)
                                         <option value="{{ $customer->id }}">{{ $customer->name }}</option>
                                     @endforeach
@@ -106,25 +106,25 @@
                             </div>
 
                             <div class="mt-5">
-                                <label class="block text-xl font-bold mb-3 text-gray-700">Payment Method:</label>
+                                <label class="block text-xl font-bold mb-3 text-gray-700">Metode Pembayaran:</label>
                                 <select id="paymentMethod" class="w-full px-5 py-4 text-xl font-semibold border-2 border-gray-300 rounded-xl focus:ring-4 focus:ring-blue-300 focus:border-blue-500">
-                                    <option value="cash">Cash</option>
-                                    <option value="card">Card</option>
-                                    <option value="transfer">Bank Transfer</option>
+                                    <option value="cash">Tunai</option>
+                                    <option value="card">Kartu</option>
+                                    <option value="transfer">Transfer Bank</option>
                                 </select>
                             </div>
 
                             <div class="mt-5">
-                                <label class="block text-xl font-bold mb-3 text-gray-700">Notes (Optional):</label>
+                                <label class="block text-xl font-bold mb-3 text-gray-700">Catatan (Opsional):</label>
                                 <textarea id="notes" class="w-full px-5 py-4 text-xl border-2 border-gray-300 rounded-xl focus:ring-4 focus:ring-blue-300 focus:border-blue-500" rows="2"></textarea>
                             </div>
 
                             <div class="mt-6 space-y-4">
                                 <button onclick="processSale()" class="w-full bg-green-600 text-white px-6 py-6 rounded-xl hover:bg-green-700 font-bold text-2xl shadow-lg hover:shadow-xl transition-all">
-                                    ✓ COMPLETE SALE
+                                    ✓ SELESAIKAN TRANSAKSI
                                 </button>
                                 <button onclick="clearCart()" class="w-full bg-red-600 text-white px-6 py-5 rounded-xl hover:bg-red-700 font-bold text-xl shadow-lg hover:shadow-xl transition-all">
-                                    Clear Cart
+                                    Kosongkan Keranjang
                                 </button>
                             </div>
                         </div>
@@ -177,7 +177,7 @@
                 if (existingItem.quantity < product.stock_quantity) {
                     existingItem.quantity++;
                 } else {
-                    alert('⚠️ NOT ENOUGH STOCK\n\nOnly ' + product.stock_quantity + ' items available.');
+                    alert('⚠️ STOK TIDAK CUKUP\n\nHanya tersedia ' + product.stock_quantity + ' item.');
                     return;
                 }
             } else {
@@ -199,7 +199,7 @@
             } else if (newQuantity <= cart[index].stock) {
                 cart[index].quantity = newQuantity;
             } else {
-                alert('⚠️ NOT ENOUGH STOCK\n\nOnly ' + cart[index].stock + ' items available.');
+                alert('⚠️ STOK TIDAK CUKUP\n\nHanya tersedia ' + cart[index].stock + ' item.');
                 return;
             }
             renderCart();
@@ -214,13 +214,13 @@
             const cartItems = document.getElementById('cartItems');
 
             if (cart.length === 0) {
-                cartItems.innerHTML = '<p class="text-gray-500 text-center text-2xl py-8">Cart is empty</p>';
+                cartItems.innerHTML = '<p class="text-gray-500 text-center text-2xl py-8">Keranjang kosong</p>';
             } else {
                 cartItems.innerHTML = cart.map((item, index) => `
                     <div class="border-2 border-gray-300 rounded-xl p-5 bg-gray-50 shadow-md">
                         <div class="mb-3">
                             <div class="font-bold text-xl mb-2 text-gray-800">${item.name}</div>
-                            <div class="text-lg text-gray-600">${formatCurrency(item.price)} each</div>
+                            <div class="text-lg text-gray-600">${formatCurrency(item.price)} per item</div>
                             <div class="text-2xl font-bold text-blue-600 mt-1">Total: ${formatCurrency(item.price * item.quantity)}</div>
                         </div>
                         <div class="flex items-center justify-between gap-3 mt-4">
@@ -229,7 +229,7 @@
                                 <span class="text-2xl font-bold min-w-[3rem] text-center">${item.quantity}</span>
                                 <button onclick="updateQuantity(${index}, ${item.quantity + 1})" class="px-5 py-3 bg-gray-200 hover:bg-gray-300 rounded-lg text-2xl font-bold w-14 h-14 flex items-center justify-center">+</button>
                             </div>
-                            <button onclick="removeItem(${index})" class="px-6 py-4 bg-red-600 text-white rounded-lg hover:bg-red-700 text-xl font-bold shadow-md">Remove</button>
+                            <button onclick="removeItem(${index})" class="px-6 py-4 bg-red-600 text-white rounded-lg hover:bg-red-700 text-xl font-bold shadow-md">Hapus</button>
                         </div>
                     </div>
                 `).join('');
@@ -250,7 +250,7 @@
         }
 
         function clearCart() {
-            if (confirm('Are you sure you want to clear the cart?')) {
+            if (confirm('Yakin ingin mengosongkan keranjang?')) {
                 cart = [];
                 renderCart();
             }
@@ -258,7 +258,7 @@
 
         async function processSale() {
             if (cart.length === 0) {
-                alert('Cart is empty');
+                alert('Keranjang masih kosong');
                 return;
             }
 
@@ -291,7 +291,7 @@
                 const result = await response.json();
 
                 if (result.success) {
-                    alert('Sale completed successfully! Invoice: ' + result.invoice_number);
+                    alert('Transaksi berhasil! Nomor Invoice: ' + result.invoice_number);
                     window.open('/sales/' + result.sale_id + '/invoice', '_blank');
                     clearCart();
                     cart = [];
@@ -300,7 +300,7 @@
                     alert('Error: ' + result.message);
                 }
             } catch (error) {
-                alert('Error processing sale: ' + error.message);
+                alert('Error memproses transaksi: ' + error.message);
             }
         }
 

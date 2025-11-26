@@ -13,28 +13,28 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-6 sm:-my-px sm:ms-10 lg:flex text-lg font-semibold">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Beranda') }}
                     </x-nav-link>
                     <x-nav-link :href="route('pos.index')" :active="request()->routeIs('pos.*')">
-                        {{ __('POS') }}
+                        {{ __('Kasir') }}
                     </x-nav-link>
                     <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')">
-                        {{ __('Products') }}
+                        {{ __('Produk') }}
                     </x-nav-link>
                     <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')">
-                        {{ __('Categories') }}
+                        {{ __('Kategori') }}
                     </x-nav-link>
                     <x-nav-link :href="route('customers.index')" :active="request()->routeIs('customers.*')">
-                        {{ __('Customers') }}
+                        {{ __('Pelanggan') }}
                     </x-nav-link>
                     <x-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.*')">
-                        {{ __('Sales') }}
+                        {{ __('Penjualan') }}
                     </x-nav-link>
                     <x-nav-link :href="route('reports.sales')" :active="request()->routeIs('reports.*')">
-                        {{ __('Reports') }}
+                        {{ __('Laporan') }}
                     </x-nav-link>
                     <x-nav-link :href="route('settings.index')" :active="request()->routeIs('settings.*')">
-                        {{ __('Settings') }}
+                        {{ __('Pengaturan') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -56,7 +56,7 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                            {{ __('Profil') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -66,7 +66,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('Keluar') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
@@ -89,28 +89,28 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden lg:hidden">
         <div class="pt-4 pb-4 space-y-3 bg-gray-50">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                {{ __('Beranda') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('pos.index')" :active="request()->routeIs('pos.*')">
-                {{ __('POS') }}
+                {{ __('Kasir') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')">
-                {{ __('Products') }}
+                {{ __('Produk') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')">
-                {{ __('Categories') }}
+                {{ __('Kategori') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('customers.index')" :active="request()->routeIs('customers.*')">
-                {{ __('Customers') }}
+                {{ __('Pelanggan') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.*')">
-                {{ __('Sales') }}
+                {{ __('Penjualan') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('reports.sales')" :active="request()->routeIs('reports.*')">
-                {{ __('Reports') }}
+                {{ __('Laporan') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('settings.index')" :active="request()->routeIs('settings.*')">
-                {{ __('Settings') }}
+                {{ __('Pengaturan') }}
             </x-responsive-nav-link>
         </div>
 
@@ -123,7 +123,7 @@
 
             <div class="mt-4 space-y-3">
                 <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
+                    {{ __('Profil') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
@@ -133,7 +133,7 @@
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{ __('Keluar') }}
                     </x-responsive-nav-link>
                 </form>
             </div>

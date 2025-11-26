@@ -5,7 +5,7 @@
                 {{ __('Products') }}
             </h2>
             <a href="{{ route('products.create') }}" class="bg-blue-600 text-white px-6 py-4 rounded-xl hover:bg-blue-700 font-bold text-xl shadow-lg transition-all border-2 border-blue-700">
-                Add New Product
+                Tambah Produk Baru
             </a>
         </div>
     </x-slot>
@@ -27,11 +27,11 @@
                     <div class="p-8">
                         <div class="flex items-center justify-between">
                             <div>
-                                <h3 class="text-2xl font-bold text-orange-800 mb-2">Low Stock Warning</h3>
-                                <p class="text-xl text-orange-900">{{ $lowStockCount }} product(s) are running low on stock</p>
+                                <h3 class="text-2xl font-bold text-orange-800 mb-2">Peringatan Stok Menipis</h3>
+                                <p class="text-xl text-orange-900">{{ $lowStockCount }} produk dengan stok menipis</p>
                             </div>
                             <a href="{{ route('products.low-stock') }}" class="bg-orange-600 text-white px-6 py-4 rounded-xl hover:bg-orange-700 font-bold text-xl border-2 border-orange-700 transition-all">
-                                View Low Stock
+                                Lihat Stok Menipis
                             </a>
                         </div>
                     </div>
@@ -49,19 +49,19 @@
                                         SKU
                                     </th>
                                     <th scope="col" class="px-6 py-5 text-left text-xl font-bold text-gray-700 uppercase tracking-wider border-b-4 border-gray-300">
-                                        Name
+                                        Nama
                                     </th>
                                     <th scope="col" class="px-6 py-5 text-left text-xl font-bold text-gray-700 uppercase tracking-wider border-b-4 border-gray-300">
-                                        Category
+                                        Kategori
                                     </th>
                                     <th scope="col" class="px-6 py-5 text-left text-xl font-bold text-gray-700 uppercase tracking-wider border-b-4 border-gray-300">
-                                        Price
+                                        Harga
                                     </th>
                                     <th scope="col" class="px-6 py-5 text-left text-xl font-bold text-gray-700 uppercase tracking-wider border-b-4 border-gray-300">
-                                        Stock
+                                        Stok
                                     </th>
                                     <th scope="col" class="px-6 py-5 text-left text-xl font-bold text-gray-700 uppercase tracking-wider border-b-4 border-gray-300">
-                                        Actions
+                                        Aksi
                                     </th>
                                 </tr>
                             </thead>
@@ -85,7 +85,7 @@
                                         <td class="px-6 py-6 whitespace-nowrap border-r-2 border-gray-200">
                                             @if($product->isLowStock())
                                                 <span class="px-4 py-2 inline-flex text-xl leading-5 font-bold rounded-lg bg-red-100 text-red-800 border-3 border-red-500">
-                                                    {{ $product->stock_quantity }} (LOW!)
+                                                    {{ $product->stock_quantity }} (RENDAH!)
                                                 </span>
                                             @else
                                                 <span class="px-4 py-2 inline-flex text-xl leading-5 font-semibold rounded-lg bg-green-100 text-green-800 border-2 border-green-300">
@@ -95,16 +95,16 @@
                                         </td>
                                         <td class="px-6 py-6 whitespace-nowrap text-lg font-medium space-x-3">
                                             <a href="{{ route('products.show', $product) }}" class="inline-block bg-blue-600 text-white px-5 py-3 rounded-lg hover:bg-blue-700 border-2 border-blue-700 transition-all font-bold">
-                                                View
+                                                Lihat
                                             </a>
                                             <a href="{{ route('products.edit', $product) }}" class="inline-block bg-indigo-600 text-white px-5 py-3 rounded-lg hover:bg-indigo-700 border-2 border-indigo-700 transition-all font-bold">
-                                                Edit
+                                                Ubah
                                             </a>
-                                            <form action="{{ route('products.destroy', $product) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                            <form action="{{ route('products.destroy', $product) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus produk ini?');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="bg-red-600 text-white px-5 py-3 rounded-lg hover:bg-red-700 border-2 border-red-700 transition-all font-bold">
-                                                    Delete
+                                                    Hapus
                                                 </button>
                                             </form>
                                         </td>
@@ -112,7 +112,7 @@
                                 @empty
                                     <tr>
                                         <td colspan="6" class="px-6 py-12 text-center text-xl text-gray-500 font-semibold">
-                                            No products found. <a href="{{ route('products.create') }}" class="text-blue-600 hover:text-blue-800 underline font-bold">Add your first product</a>
+                                            Tidak ada produk. <a href="{{ route('products.create') }}" class="text-blue-600 hover:text-blue-800 underline font-bold">Tambah produk pertama Anda</a>
                                         </td>
                                     </tr>
                                 @endforelse

@@ -5,7 +5,7 @@
                 {{ __('Customers') }}
             </h2>
             <a href="{{ route('customers.create') }}" class="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 font-bold text-xl shadow-lg transition-all">
-                + Add New Customer
+                + Tambah Pelanggan Baru
             </a>
         </div>
     </x-slot>
@@ -22,8 +22,8 @@
 
                     <!-- Search Box -->
                     <div class="mb-6">
-                        <label class="block text-xl font-semibold mb-3 text-gray-700">Search Customers:</label>
-                        <input type="text" id="customerSearch" placeholder="Search by name, code, or phone..."
+                        <label class="block text-xl font-semibold mb-3 text-gray-700">Cari Pelanggan:</label>
+                        <input type="text" id="customerSearch" placeholder="Cari berdasarkan nama, kode, atau telepon..."
                                class="w-full px-6 py-5 text-2xl border-3 border-gray-300 rounded-xl focus:ring-4 focus:ring-blue-300 focus:border-blue-500"
                                onkeyup="filterCustomers()">
                     </div>
@@ -33,11 +33,11 @@
                         <table class="min-w-full border-3 border-gray-300">
                             <thead class="bg-gray-100">
                                 <tr>
-                                    <th class="px-6 py-5 text-left text-xl font-bold text-gray-700 border-b-3 border-gray-300">Customer Code</th>
-                                    <th class="px-6 py-5 text-left text-xl font-bold text-gray-700 border-b-3 border-gray-300">Name</th>
+                                    <th class="px-6 py-5 text-left text-xl font-bold text-gray-700 border-b-3 border-gray-300">Kode Pelanggan</th>
+                                    <th class="px-6 py-5 text-left text-xl font-bold text-gray-700 border-b-3 border-gray-300">Nama</th>
                                     <th class="px-6 py-5 text-left text-xl font-bold text-gray-700 border-b-3 border-gray-300">Email</th>
-                                    <th class="px-6 py-5 text-left text-xl font-bold text-gray-700 border-b-3 border-gray-300">Phone</th>
-                                    <th class="px-6 py-5 text-left text-xl font-bold text-gray-700 border-b-3 border-gray-300">Actions</th>
+                                    <th class="px-6 py-5 text-left text-xl font-bold text-gray-700 border-b-3 border-gray-300">Telepon</th>
+                                    <th class="px-6 py-5 text-left text-xl font-bold text-gray-700 border-b-3 border-gray-300">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody id="customerTableBody">
@@ -60,19 +60,19 @@
                                             <div class="flex gap-3">
                                                 <a href="{{ route('customers.show', $customer) }}"
                                                    class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 font-bold text-lg shadow-md transition-all">
-                                                    View
+                                                    Lihat
                                                 </a>
                                                 <a href="{{ route('customers.edit', $customer) }}"
                                                    class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 font-bold text-lg shadow-md transition-all">
-                                                    Edit
+                                                    Ubah
                                                 </a>
                                                 <form action="{{ route('customers.destroy', $customer) }}" method="POST"
-                                                      onsubmit="return confirm('Are you sure you want to delete this customer?');" class="inline">
+                                                      onsubmit="return confirm('Apakah Anda yakin ingin menghapus pelanggan ini?');" class="inline">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
                                                             class="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 font-bold text-lg shadow-md transition-all">
-                                                        Delete
+                                                        Hapus
                                                     </button>
                                                 </form>
                                             </div>
@@ -81,7 +81,7 @@
                                 @empty
                                     <tr>
                                         <td colspan="5" class="px-6 py-10 text-center text-xl text-gray-500">
-                                            No customers found. <a href="{{ route('customers.create') }}" class="text-blue-600 hover:text-blue-800 font-bold">Add your first customer</a>
+                                            Tidak ada pelanggan. <a href="{{ route('customers.create') }}" class="text-blue-600 hover:text-blue-800 font-bold">Tambah pelanggan pertama Anda</a>
                                         </td>
                                     </tr>
                                 @endforelse
@@ -95,11 +95,11 @@
                             <div class="customer-card border-3 border-gray-300 rounded-xl p-6 bg-gray-50 shadow-md"
                                  data-search="{{ strtolower($customer->customer_code . ' ' . $customer->name . ' ' . $customer->email . ' ' . $customer->phone) }}">
                                 <div class="mb-4">
-                                    <div class="text-sm font-semibold text-gray-600 mb-1">Customer Code</div>
+                                    <div class="text-sm font-semibold text-gray-600 mb-1">Kode Pelanggan</div>
                                     <div class="text-xl font-bold text-gray-900">{{ $customer->customer_code }}</div>
                                 </div>
                                 <div class="mb-4">
-                                    <div class="text-sm font-semibold text-gray-600 mb-1">Name</div>
+                                    <div class="text-sm font-semibold text-gray-600 mb-1">Nama</div>
                                     <div class="text-xl font-bold text-gray-900">{{ $customer->name }}</div>
                                 </div>
                                 <div class="mb-4">
@@ -107,34 +107,34 @@
                                     <div class="text-lg text-gray-700">{{ $customer->email ?: 'N/A' }}</div>
                                 </div>
                                 <div class="mb-4">
-                                    <div class="text-sm font-semibold text-gray-600 mb-1">Phone</div>
+                                    <div class="text-sm font-semibold text-gray-600 mb-1">Telepon</div>
                                     <div class="text-lg text-gray-700">{{ $customer->phone ?: 'N/A' }}</div>
                                 </div>
                                 <div class="flex flex-col gap-3">
                                     <a href="{{ route('customers.show', $customer) }}"
                                        class="bg-blue-600 text-white px-6 py-4 rounded-xl hover:bg-blue-700 font-bold text-xl text-center shadow-md transition-all">
-                                        View
+                                        Lihat
                                     </a>
                                     <a href="{{ route('customers.edit', $customer) }}"
                                        class="bg-green-600 text-white px-6 py-4 rounded-xl hover:bg-green-700 font-bold text-xl text-center shadow-md transition-all">
-                                        Edit
+                                        Ubah
                                     </a>
                                     <form action="{{ route('customers.destroy', $customer) }}" method="POST"
-                                          onsubmit="return confirm('Are you sure you want to delete this customer?');">
+                                          onsubmit="return confirm('Apakah Anda yakin ingin menghapus pelanggan ini?');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
                                                 class="w-full bg-red-600 text-white px-6 py-4 rounded-xl hover:bg-red-700 font-bold text-xl shadow-md transition-all">
-                                            Delete
+                                            Hapus
                                         </button>
                                     </form>
                                 </div>
                             </div>
                         @empty
                             <div class="text-center py-10">
-                                <p class="text-xl text-gray-500 mb-6">No customers found.</p>
+                                <p class="text-xl text-gray-500 mb-6">Tidak ada pelanggan.</p>
                                 <a href="{{ route('customers.create') }}" class="inline-block bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 font-bold text-xl shadow-lg">
-                                    Add Your First Customer
+                                    Tambah Pelanggan Pertama Anda
                                 </a>
                             </div>
                         @endforelse

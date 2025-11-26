@@ -5,7 +5,7 @@
                 {{ __('Categories') }}
             </h2>
             <a href="{{ route('categories.create') }}" class="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 font-bold text-xl shadow-lg transition-all">
-                + Add New Category
+                + Tambah Kategori Baru
             </a>
         </div>
     </x-slot>
@@ -20,17 +20,17 @@
 
             <div class="bg-white overflow-hidden shadow-lg rounded-xl border-2 border-gray-200">
                 <div class="p-6 sm:p-8">
-                    <h3 class="text-2xl font-bold mb-6 text-gray-800">All Categories</h3>
+                    <h3 class="text-2xl font-bold mb-6 text-gray-800">Semua Kategori</h3>
 
                     @if($categories->count() > 0)
                         <div class="overflow-x-auto">
                             <table class="min-w-full">
                                 <thead>
                                     <tr class="border-b-4 border-gray-300">
-                                        <th class="px-6 py-5 text-left text-xl font-bold text-gray-800">Name</th>
-                                        <th class="px-6 py-5 text-left text-xl font-bold text-gray-800">Description</th>
-                                        <th class="px-6 py-5 text-center text-xl font-bold text-gray-800">Products</th>
-                                        <th class="px-6 py-5 text-center text-xl font-bold text-gray-800">Actions</th>
+                                        <th class="px-6 py-5 text-left text-xl font-bold text-gray-800">Nama</th>
+                                        <th class="px-6 py-5 text-left text-xl font-bold text-gray-800">Deskripsi</th>
+                                        <th class="px-6 py-5 text-center text-xl font-bold text-gray-800">Produk</th>
+                                        <th class="px-6 py-5 text-center text-xl font-bold text-gray-800">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y-2 divide-gray-200">
@@ -42,7 +42,7 @@
                                                 </a>
                                             </td>
                                             <td class="px-6 py-6 text-lg text-gray-700">
-                                                {{ Str::limit($category->description ?? 'No description', 80) }}
+                                                {{ Str::limit($category->description ?? 'Tidak ada deskripsi', 80) }}
                                             </td>
                                             <td class="px-6 py-6 text-center">
                                                 <span class="inline-block bg-blue-100 text-blue-800 px-5 py-3 rounded-xl text-xl font-bold">
@@ -52,13 +52,13 @@
                                             <td class="px-6 py-6">
                                                 <div class="flex items-center justify-center gap-3">
                                                     <a href="{{ route('categories.edit', $category) }}" class="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 font-bold text-lg shadow-md transition-all">
-                                                        Edit
+                                                        Ubah
                                                     </a>
-                                                    <form action="{{ route('categories.destroy', $category) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this category? This action cannot be undone.');">
+                                                    <form action="{{ route('categories.destroy', $category) }}" method="POST" class="inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus kategori ini? Tindakan ini tidak dapat dibatalkan.');">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 font-bold text-lg shadow-md transition-all">
-                                                            Delete
+                                                            Hapus
                                                         </button>
                                                     </form>
                                                 </div>
@@ -70,9 +70,9 @@
                         </div>
                     @else
                         <div class="text-center py-12">
-                            <p class="text-2xl text-gray-500 mb-6">No categories found.</p>
+                            <p class="text-2xl text-gray-500 mb-6">Tidak ada kategori.</p>
                             <a href="{{ route('categories.create') }}" class="inline-block bg-blue-600 text-white px-8 py-5 rounded-xl hover:bg-blue-700 font-bold text-xl shadow-lg">
-                                Create Your First Category
+                                Buat Kategori Pertama Anda
                             </a>
                         </div>
                     @endif
