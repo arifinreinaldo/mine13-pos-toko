@@ -80,7 +80,7 @@
                                             </span>
                                         </td>
                                         <td class="px-6 py-6 whitespace-nowrap text-lg text-gray-900 font-bold border-r-2 border-gray-200">
-                                            ${{ number_format($product->price, 2) }}
+                                            {{ format_currency($product->price) }}
                                         </td>
                                         <td class="px-6 py-6 whitespace-nowrap border-r-2 border-gray-200">
                                             @if($product->isLowStock())

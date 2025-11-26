@@ -50,7 +50,7 @@
                                                  data-category="{{ $category->id }}"
                                                  onclick='addToCart(@json($product))'>
                                                 <div class="font-bold text-xl mb-2 text-gray-800">{{ $product->name }}</div>
-                                                <div class="text-3xl font-bold text-blue-600 mb-2">${{ number_format($product->price, 2) }}</div>
+                                                <div class="text-3xl font-bold text-blue-600 mb-2">{{ format_currency($product->price) }}</div>
                                                 <div class="text-lg text-gray-600">Stock: {{ $product->stock_quantity }} available</div>
                                             </div>
                                         @endif
@@ -79,19 +79,19 @@
                             <div class="border-t-4 border-gray-300 pt-6 space-y-4">
                                 <div class="flex justify-between text-xl font-semibold">
                                     <span class="text-gray-700">Subtotal:</span>
-                                    <span id="subtotal" class="text-gray-900">$0.00</span>
+                                    <span id="subtotal" class="text-gray-900">Rp 0</span>
                                 </div>
                                 <div class="flex justify-between items-center text-xl">
-                                    <span class="text-gray-700 font-semibold">Tax ($):</span>
-                                    <input type="number" id="tax" value="0" step="0.01" min="0" class="w-32 px-4 py-3 text-xl font-semibold border-2 border-gray-300 rounded-lg text-right focus:ring-4 focus:ring-blue-300 focus:border-blue-500" onchange="updateTotals()">
+                                    <span class="text-gray-700 font-semibold">Tax (Rp):</span>
+                                    <input type="number" id="tax" value="0" step="100" min="0" class="w-32 px-4 py-3 text-xl font-semibold border-2 border-gray-300 rounded-lg text-right focus:ring-4 focus:ring-blue-300 focus:border-blue-500" onchange="updateTotals()">
                                 </div>
                                 <div class="flex justify-between items-center text-xl">
-                                    <span class="text-gray-700 font-semibold">Discount ($):</span>
-                                    <input type="number" id="discount" value="0" step="0.01" min="0" class="w-32 px-4 py-3 text-xl font-semibold border-2 border-gray-300 rounded-lg text-right focus:ring-4 focus:ring-blue-300 focus:border-blue-500" onchange="updateTotals()">
+                                    <span class="text-gray-700 font-semibold">Discount (Rp):</span>
+                                    <input type="number" id="discount" value="0" step="100" min="0" class="w-32 px-4 py-3 text-xl font-semibold border-2 border-gray-300 rounded-lg text-right focus:ring-4 focus:ring-blue-300 focus:border-blue-500" onchange="updateTotals()">
                                 </div>
                                 <div class="flex justify-between text-3xl font-bold bg-blue-50 p-4 rounded-xl">
                                     <span class="text-gray-800">TOTAL:</span>
-                                    <span id="total" class="text-blue-600">$0.00</span>
+                                    <span id="total" class="text-blue-600">Rp 0</span>
                                 </div>
                             </div>
 
@@ -135,6 +135,14 @@
     </div>
 
     <script>
+        // Currency formatter
+        const formatCurrency = (amount) => {
+            return 'Rp ' + new Intl.NumberFormat('id-ID', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount);
+        };
+
         let cart = [];
 
         function toggleMobileCart() {
@@ -212,8 +220,8 @@
                     <div class="border-2 border-gray-300 rounded-xl p-5 bg-gray-50 shadow-md">
                         <div class="mb-3">
                             <div class="font-bold text-xl mb-2 text-gray-800">${item.name}</div>
-                            <div class="text-lg text-gray-600">$${item.price.toFixed(2)} each</div>
-                            <div class="text-2xl font-bold text-blue-600 mt-1">Total: $${(item.price * item.quantity).toFixed(2)}</div>
+                            <div class="text-lg text-gray-600">${formatCurrency(item.price)} each</div>
+                            <div class="text-2xl font-bold text-blue-600 mt-1">Total: ${formatCurrency(item.price * item.quantity)}</div>
                         </div>
                         <div class="flex items-center justify-between gap-3 mt-4">
                             <div class="flex items-center gap-3 bg-white border-2 border-gray-300 rounded-lg p-2">
@@ -237,8 +245,8 @@
             const discount = parseFloat(document.getElementById('discount').value) || 0;
             const total = subtotal + tax - discount;
 
-            document.getElementById('subtotal').textContent = '$' + subtotal.toFixed(2);
-            document.getElementById('total').textContent = '$' + total.toFixed(2);
+            document.getElementById('subtotal').textContent = formatCurrency(subtotal);
+            document.getElementById('total').textContent = formatCurrency(total);
         }
 
         function clearCart() {

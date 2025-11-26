@@ -147,9 +147,9 @@
                 <tr>
                     <td>{{ $index + 1 }}</td>
                     <td>{{ $item->product->name }}</td>
-                    <td>${{ number_format($item->price, 2) }}</td>
+                    <td>{{ format_currency($item->price) }}</td>
                     <td>{{ $item->quantity }}</td>
-                    <td>${{ number_format($item->subtotal, 2) }}</td>
+                    <td>{{ format_currency($item->subtotal) }}</td>
                 </tr>
             @endforeach
         </tbody>
@@ -159,19 +159,19 @@
         <table>
             <tr>
                 <td><strong>Subtotal:</strong></td>
-                <td style="text-align: right;">${{ number_format($sale->subtotal, 2) }}</td>
+                <td style="text-align: right;">{{ format_currency($sale->subtotal) }}</td>
             </tr>
             <tr>
                 <td><strong>Tax:</strong></td>
-                <td style="text-align: right;">${{ number_format($sale->tax, 2) }}</td>
+                <td style="text-align: right;">{{ format_currency($sale->tax) }}</td>
             </tr>
             <tr>
                 <td><strong>Discount:</strong></td>
-                <td style="text-align: right;">-${{ number_format($sale->discount, 2) }}</td>
+                <td style="text-align: right;">-{{ format_currency($sale->discount) }}</td>
             </tr>
             <tr class="total-row">
                 <td><strong>TOTAL:</strong></td>
-                <td style="text-align: right;"><strong>${{ number_format($sale->total, 2) }}</strong></td>
+                <td style="text-align: right;"><strong>{{ format_currency($sale->total) }}</strong></td>
             </tr>
         </table>
     </div>

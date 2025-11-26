@@ -32,7 +32,7 @@
                 <div class="bg-white overflow-hidden shadow-lg rounded-xl border-2 border-gray-200">
                     <div class="p-8">
                         <div class="text-xl font-semibold text-gray-600 mb-3">Today's Revenue</div>
-                        <div class="text-5xl font-bold text-green-600">${{ number_format($stats['today_revenue'], 2) }}</div>
+                        <div class="text-5xl font-bold text-green-600">{{ format_currency($stats['today_revenue']) }}</div>
                     </div>
                 </div>
             </div>
